@@ -1,14 +1,14 @@
 
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import DashboardPage from './screens/DashboardPage';
-import TrackingPage from './screens/TrackingPage';
-import LogbookPage from './screens/LogbookPage';
-import AdvisorPage from './screens/AdvisorPage';
-import POSPage from './screens/POSPage';
-import CustomersPage from './screens/CustomersPage';
-import ServiceManagementPage from './screens/ServiceManagementPage';
-import AccountingPage from './screens/AccountingPage';
+import DashboardPage from './screens/DashboardPage.tsx';
+import TrackingPage from './screens/TrackingPage.tsx';
+import LogbookPage from './screens/LogbookPage.tsx';
+import AdvisorPage from './screens/AdvisorPage.tsx';
+import POSPage from './screens/POSPage.tsx';
+import CustomersPage from './screens/CustomersPage.tsx';
+import ServiceManagementPage from './screens/ServiceManagementPage.tsx';
+import AccountingPage from './screens/AccountingPage.tsx';
 
 export interface Product {
   id: string;

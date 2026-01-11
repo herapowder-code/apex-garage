@@ -3,7 +3,7 @@
   "name": "Apex Garage",
   "short_name": "Apex",
   "description": "Terminal de Gestión Premium para Apex Garage",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#0a120a",
   "theme_color": "#1a8e3f",

@@ -1,7 +1,8 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// El shim en index.html asegura que process.env.API_KEY exista como string vacío si no está configurado
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
 
 export const getCarAdvice = async (query: string): Promise<string> => {
   try {

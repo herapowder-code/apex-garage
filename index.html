@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a120a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3082/3082041.png">
+    <title>Apex Garage - Rendimiento Premium</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a8e3f", // Verde Logo Apex
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a120a", // Negro con matiz verde
+                        "surface-dark": "#121d14", // Superficie verde oscuro
+                        "accent-yellow": "#f6f34a", // Amarillo Logo Apex
+                        "accent-orange": "#f26d0d"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #0a120a;
+            user-select: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .pulse-brand {
+            box-shadow: 0 0 0 0 rgba(26, 142, 63, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(26, 142, 63, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 142, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 142, 63, 0); }
+        }
+        .carbon-pattern {
+            background-color: #121d14;
+            background-image: linear-gradient(45deg, #18281a 25%, transparent 25%), 
+                              linear-gradient(-45deg, #18281a 25%, transparent 25%), 
+                              linear-gradient(45deg, transparent 75%, #18281a 75%), 
+                              linear-gradient(-45deg, transparent 75%, #18281a 75%);
+            background-size: 4px 4px;
+            background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
+        }
+        .logo-gradient {
+            background: linear-gradient(135deg, #1a8e3f 0%, #f6f34a 100%);
+        }
+        /* Fix para el área segura de iPhone (Notch) */
+        nav {
+            padding-bottom: env(safe-area-inset-bottom, 24px) !important;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+</head>
+<body class="dark overflow-x-hidden">
+    <div id="root"></div>
+</body>
+</html>

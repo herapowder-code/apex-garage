@@ -1,0 +1,23 @@
+
+{
+  "name": "Apex Garage",
+  "short_name": "Apex",
+  "description": "Terminal de Gestión Premium para Apex Garage",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a120a",
+  "theme_color": "#1a8e3f",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3082/3082041.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3082/3082041.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

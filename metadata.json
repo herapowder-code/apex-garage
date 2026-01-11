@@ -1,0 +1,7 @@
+{
+  "name": "Apex Garage - Premium Performance",
+  "description": "Una aplicación premium para el seguimiento de servicios automotrices, registro digital y asesoría de mantenimiento en tiempo real.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

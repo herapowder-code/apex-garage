@@ -6,10 +6,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0a120a">
-    <title>Apex Garage - Terminal Premium</title>
+    <title>Apex Garage Terminal</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
     
     <script>
@@ -21,8 +21,7 @@
                         "primary": "#1a8e3f",
                         "background-dark": "#0a120a",
                         "surface-dark": "#121d14",
-                        "accent-yellow": "#f6f34a",
-                        "accent-orange": "#f26d0d"
+                        "accent-yellow": "#f6f34a"
                     }
                 },
             },
@@ -33,11 +32,11 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a120a;
-            margin: 0;
             color: white;
+            margin: 0;
+            overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
-        #root { min-height: 100vh; }
         .carbon-pattern {
             background-color: #121d14;
             background-image: linear-gradient(45deg, #18281a 25%, transparent 25%), 
@@ -46,9 +45,7 @@
                               linear-gradient(-45deg, transparent 75%, #18281a 75%);
             background-size: 4px 4px;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 
     <script type="importmap">
@@ -65,7 +62,7 @@
 }
 </script>
 </head>
-<body class="dark overflow-x-hidden">
+<body class="dark">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
 </body>

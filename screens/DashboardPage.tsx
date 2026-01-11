@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Customer, Job } from '../App';
+import { Customer, Job } from '../App.tsx';
 
 interface DashboardPageProps {
   customers: Customer[];
@@ -54,15 +53,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ customers, jobs }) => {
         <div className="grid grid-cols-3 gap-3">
           <button onClick={() => navigate('/accounting')} className="flex flex-col items-center justify-center gap-2 p-4 bg-surface-dark rounded-2xl border border-white/5 shadow-xl active:scale-95 transition-all">
             <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span className="material-symbols-outlined">payments</span></div>
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Finanzas</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Finanzas</span>
           </button>
           <button onClick={() => navigate('/customers')} className="flex flex-col items-center justify-center gap-2 p-4 bg-surface-dark rounded-2xl border border-white/5 shadow-xl active:scale-95 transition-all">
             <div className="size-10 rounded-full bg-accent-yellow/10 flex items-center justify-center text-accent-yellow"><span className="material-symbols-outlined">group</span></div>
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Clientes</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Clientes</span>
           </button>
           <button onClick={() => navigate('/admin-services')} className="flex flex-col items-center justify-center gap-2 p-4 bg-surface-dark rounded-2xl border border-white/5 shadow-xl active:scale-95 transition-all">
             <div className="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span className="material-symbols-outlined">garage</span></div>
-            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Servicios</span>
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">Servicios</span>
           </button>
         </div>
       </section>
@@ -116,7 +115,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ customers, jobs }) => {
       <section className="px-4 py-6">
         <div className="flex justify-between items-center mb-4 px-1">
           <h2 className="text-white text-lg font-black italic uppercase tracking-tighter">Historial Reciente</h2>
-          <span className="text-[9px] font-black text-primary uppercase tracking-widest">Ver Bitácora</span>
+          <span className="text-[9px] font-black text-primary uppercase tracking-widest cursor-pointer" onClick={() => navigate('/logbook')}>Ver Bitácora</span>
         </div>
         <div className="bg-surface-dark rounded-2xl p-5 border border-white/5 flex items-center gap-4 shadow-xl">
           <div className="size-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent-yellow/10 flex items-center justify-center text-accent-yellow shrink-0 border border-white/5">

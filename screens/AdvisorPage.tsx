@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCarAdvice } from '../services/geminiService';
+import { getCarAdvice } from '../services/geminiService.ts';
 
 interface Message {
   text: string;
@@ -11,7 +11,7 @@ interface Message {
 const AdvisorPage: React.FC = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hola, soy tu Asesor Virtual de Apex Garage. ¿En qué puedo ayudarte hoy con tu Porsche?", sender: 'ai' }
+    { text: "Hola, soy tu Asesor Virtual de Apex Garage. ¿En qué puedo ayudarte hoy con el mantenimiento de tu vehículo?", sender: 'ai' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +48,7 @@ const AdvisorPage: React.FC = () => {
           <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Asesor Virtual</h2>
           <span className="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1">
             <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-            Potenciado por Gemini
+            IA Activa
           </span>
         </div>
         <div className="w-12"></div>
@@ -60,7 +60,7 @@ const AdvisorPage: React.FC = () => {
             <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
               m.sender === 'user' 
                 ? 'bg-primary text-white rounded-tr-none shadow-lg' 
-                : 'bg-white dark:bg-surface-dark text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-tl-none shadow-sm'
+                : 'bg-white dark:bg-surface-dark text-slate-800 dark:text-white border border-slate-200 dark:border-slate-800 rounded-tl-none shadow-sm'
             }`}>
               {m.text}
             </div>
@@ -87,7 +87,7 @@ const AdvisorPage: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Pregunta sobre mantenimiento..."
+            placeholder="Escribe tu consulta aquí..."
             className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 dark:text-white"
           />
           <button 
@@ -98,7 +98,6 @@ const AdvisorPage: React.FC = () => {
             <span className="material-symbols-outlined">send</span>
           </button>
         </div>
-        <p className="text-[9px] text-center text-slate-500 mt-2 uppercase tracking-tighter">Consejos basados en IA • Consulta a un técnico para decisiones críticas</p>
       </div>
     </div>
   );

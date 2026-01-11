@@ -108,10 +108,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const activeTab = getActiveTab();
 
   return (
-    <div className="relative min-h-screen max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden font-display antialiased pb-24">
+    <div className="relative min-h-screen max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden font-display antialiased pb-24 border-x border-white/5">
       {children}
       
-      <nav className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-3 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 max-w-md mx-auto">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-50 px-4 pb-6 pt-3 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800">
         <div className="flex items-center justify-between px-2">
           <Link to="/" className={`flex flex-col items-center gap-1 ${activeTab === 'home' ? 'text-primary' : 'text-slate-400 dark:text-slate-600'}`}>
             <span className={`material-symbols-outlined text-[26px] ${activeTab === 'home' ? 'fill-1' : ''}`}>dashboard</span>

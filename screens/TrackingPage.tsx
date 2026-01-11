@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Customer, Job } from '../App';
+import { Customer, Job } from '../App.tsx';
 
 interface TrackingPageProps {
   customers: Customer[];
@@ -55,7 +54,7 @@ const TrackingPage: React.FC<TrackingPageProps> = ({ customers, jobs, setJobs })
         <div onClick={() => navigate(-1)} className="text-slate-800 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
           <span className="material-symbols-outlined">chevron_left</span>
         </div>
-        <div className="flex flex-col items-center flex-1">
+        <div className="flex flex-col items-center flex-1 text-center">
           <h2 className="text-slate-900 dark:text-white text-lg font-black italic uppercase tracking-tighter leading-tight">{customer.car}</h2>
           <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{job.bay}</span>
         </div>
@@ -92,7 +91,7 @@ const TrackingPage: React.FC<TrackingPageProps> = ({ customers, jobs, setJobs })
         <div className="mt-8 px-4">
           <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-4 px-1">Checklist Técnico</h3>
           <div className="space-y-3">
-            {job.steps.map((step, idx) => (
+            {job.steps.map((step) => (
               <button 
                 key={step.id} 
                 onClick={() => toggleStep(step.id)}

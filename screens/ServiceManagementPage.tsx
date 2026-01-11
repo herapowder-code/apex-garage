@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Product } from '../App';
+// Standardized import path to include .tsx extension
+import { Product } from '../App.tsx';
 
 interface ServiceManagementPageProps {
   products: Product[];
@@ -31,6 +31,7 @@ const ServiceManagementPage: React.FC<ServiceManagementPageProps> = ({ products,
   };
 
   const addService = () => {
+    // barcode is now correctly recognized as a valid property of Product
     const newService: Product = {
       id: Date.now().toString(),
       name: 'Nuevo Ítem',

@@ -1,100 +1,72 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCarAdvice } from '../services/geminiService.ts';
-
-interface Message {
-  text: string;
-  sender: 'user' | 'ai';
-}
+import { GoogleGenAI } from "@google/genai";
 
 const AdvisorPage: React.FC = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState<Message[]>([
-    { text: "Hola, soy tu Asesor Virtual de Apex Garage. ¿En qué puedo ayudarte hoy con el mantenimiento de tu vehículo?", sender: 'ai' }
-  ]);
+  const [messages, setMessages] = useState([{ text: "Terminal Apex activa. ¿Qué consulta técnica tienes sobre detailing o performance?", sender: 'ai' }]);
   const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => endRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages]);
+
+  const askGemini = async (query: string) => {
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: [{ role: 'user', parts: [{ text: query }] }],
+        config: {
+          systemInstruction: "Eres el Asesor Maestro de Apex Garage. Responde en español latino con un tono sofisticado y técnico. Eres experto en nanotecnología cerámica, corrección de pintura y mantenimiento boutique.",
+        },
+      });
+      return response.text || "No hay respuesta disponible.";
+    } catch (e) {
+      return "Error en el núcleo de IA.";
+    }
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const userMsg = input.trim();
+  const send = async () => {
+    if (!input.trim() || loading) return;
+    const userText = input;
     setInput('');
-    setMessages(prev => [...prev, { text: userMsg, sender: 'user' }]);
-    setIsLoading(true);
-
-    const aiResponse = await getCarAdvice(userMsg);
-    setMessages(prev => [...prev, { text: aiResponse, sender: 'ai' }]);
-    setIsLoading(false);
+    setMessages(prev => [...prev, { text: userText, sender: 'user' }]);
+    setLoading(true);
+    const res = await askGemini(userText);
+    setMessages(prev => [...prev, { text: res, sender: 'ai' }]);
+    setLoading(false);
   };
 
   return (
-    <div className="flex h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-hidden">
-      <div className="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between z-10 sticky top-0 border-b border-slate-200 dark:border-slate-800">
-        <div onClick={() => navigate(-1)} className="text-slate-800 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
-          <span className="material-symbols-outlined">chevron_left</span>
-        </div>
-        <div className="flex flex-col items-center flex-1">
-          <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Asesor Virtual</h2>
-          <span className="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-            IA Activa
-          </span>
-        </div>
-        <div className="w-12"></div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+    <div className="flex flex-col h-screen max-h-screen">
+      <header className="p-4 border-b border-white/5 flex items-center gap-4 bg-background-dark/80 backdrop-blur-md">
+        <button onClick={() => navigate(-1)} className="material-symbols-outlined">arrow_back_ios</button>
+        <h2 className="font-black italic uppercase tracking-tighter">Asesor Maestro</h2>
+      </header>
+      
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
-              m.sender === 'user' 
-                ? 'bg-primary text-white rounded-tr-none shadow-lg' 
-                : 'bg-white dark:bg-surface-dark text-slate-800 dark:text-white border border-slate-200 dark:border-slate-800 rounded-tl-none shadow-sm'
-            }`}>
+            <div className={`max-w-[85%] p-4 rounded-2xl text-xs leading-relaxed ${m.sender === 'user' ? 'bg-primary text-white' : 'bg-surface-dark text-slate-200 border border-white/5'}`}>
               {m.text}
             </div>
           </div>
         ))}
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-white dark:bg-surface-dark p-3 rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-800">
-              <div className="flex gap-1">
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"></div>
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce [animation-delay:0.4s]"></div>
-              </div>
-            </div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
+        {loading && <div className="p-2 animate-pulse text-[10px] text-primary font-black uppercase">Procesando...</div>}
+        <div ref={endRef} />
       </div>
 
-      <div className="p-4 bg-white/50 dark:bg-background-dark/50 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 mb-20">
-        <div className="flex items-center gap-2 bg-white dark:bg-surface-dark rounded-full p-1.5 border border-slate-200 dark:border-slate-800 shadow-inner">
+      <div className="p-4 bg-background-dark border-t border-white/5 mb-20">
+        <div className="flex gap-2 bg-surface-dark p-1.5 rounded-2xl border border-white/10">
           <input 
-            type="text" 
+            className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-3"
+            placeholder="Consulta técnica..."
             value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Escribe tu consulta aquí..."
-            className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 dark:text-white"
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && send()}
           />
-          <button 
-            onClick={handleSend}
-            disabled={isLoading || !input.trim()}
-            className="flex size-10 items-center justify-center rounded-full bg-primary text-white disabled:opacity-50 transition-opacity"
-          >
+          <button onClick={send} className="size-10 bg-primary rounded-xl flex items-center justify-center">
             <span className="material-symbols-outlined">send</span>
           </button>
         </div>

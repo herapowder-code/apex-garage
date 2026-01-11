@@ -7,15 +7,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0a120a">
     <title>Apex Garage - Terminal Premium</title>
-    
-    <!-- 1. SHIM PARA PROCESS (DEBE SER LO PRIMERO) -->
-    <script>
-        window.process = { env: { API_KEY: "" } };
-    </script>
 
-    <!-- 2. LIBRERÍAS EXTERNAS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet">
     
@@ -53,9 +46,11 @@
                               linear-gradient(-45deg, transparent 75%, #18281a 75%);
             background-size: 4px 4px;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 
-    <!-- 3. IMPORT MAP CORREGIDO (SIN DUPLICADOS) -->
     <script type="importmap">
 {
   "imports": {
@@ -71,14 +66,7 @@
 </script>
 </head>
 <body class="dark overflow-x-hidden">
-    <div id="root">
-        <!-- Indicador de carga inicial por si el JS tarda -->
-        <div style="display: flex; height: 100vh; align-items: center; justify-content: center; background: #0a120a; color: #1a8e3f; font-family: sans-serif; flex-direction: column; gap: 20px;">
-            <div style="width: 40px; height: 40px; border: 4px solid #1a8e3f22; border-top-color: #1a8e3f; border-radius: 50%; animate: spin 1s linear infinite;"></div>
-            <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
-            <span style="text-transform: uppercase; letter-spacing: 0.2em; font-size: 10px; font-weight: 900;">Cargando Apex Garage...</span>
-        </div>
-    </div>
-    <script type="text/babel" data-type="module" src="index.tsx"></script>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
